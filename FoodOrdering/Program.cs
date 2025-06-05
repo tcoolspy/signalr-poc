@@ -4,6 +4,7 @@ using FoodOrdering.Data;
 using FoodOrdering.Hubs;
 using FoodOrdering.Workers;
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 
 namespace FoodOrdering;
 
@@ -43,13 +44,19 @@ public class Program
             );
         });
         builder.Services.AddSignalR(options =>
-        {
-            options.EnableDetailedErrors = true;
-        })
-        .AddJsonProtocol(opt =>
-        {
-            opt.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-        });
+            {
+                options.EnableDetailedErrors = true;
+            })
+            .AddJsonProtocol(opt =>
+            {
+                opt.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
+            // for scaleout using redis, see: https://learn.microsoft.com/en-us/aspnet/core/signalr/redis-backplane?view=aspnetcore-9.0
+            // .AddStackExchangeRedis("connectionString", options =>
+            // {
+            //     options.Configuration.ChannelPrefix = RedisChannel.Literal("MyApp");
+            // });
+        
         var app = builder.Build();
 
         app.MapDefaultEndpoints();
