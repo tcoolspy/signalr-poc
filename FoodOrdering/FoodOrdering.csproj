@@ -18,8 +18,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SignalRPOC Solution.ServiceDefaults\SignalRPOC Solution.ServiceDefaults.csproj" />
-  </ItemGroup>
-
 </Project>

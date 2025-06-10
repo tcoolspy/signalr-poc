@@ -1,5 +1,7 @@
 ﻿using FoodOrdering.Data;
 using FoodOrdering.Hubs;
+using FoodOrdering.Hubs.Extensions;
+using FoodOrdering.Hubs.Interfaces;
 using FoodOrdering.Hubs.Models.Timer;
 using FoodOrdering.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +15,12 @@ namespace FoodOrdering.Controllers;
 public class KitchenController : ControllerBase
 {
     private readonly DataContext _context;
-    private KitchenTimer KitchenTimer;
+    private IHubContext<FoodHub, IFoodOrderClient> _hubContext;
 
-    public KitchenController(DataContext context, IHubContext<FoodHub> foodHub)
+    public KitchenController(DataContext context, IHubContext<FoodHub> foodHub, IHubContext<FoodHub, IFoodOrderClient> hubContext)
     {
         _context = context;
-        KitchenTimer = new KitchenTimer(foodHub);
+        _hubContext = hubContext;
     }
 
     [HttpGet]

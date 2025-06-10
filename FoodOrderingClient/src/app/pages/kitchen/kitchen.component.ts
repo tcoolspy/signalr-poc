@@ -3,6 +3,7 @@ import {firstValueFrom, Subscription} from 'rxjs';
 import {RealtimeClientService} from '../../realtime-client.service';
 import {HttpClient} from '@angular/common/http';
 import {Order} from '../../models/order';
+import {TimerUpdate} from '../../models/timer-update';
 import {OrderState} from '../../models/order-state';
 import {DatePipe} from '@angular/common';
 
@@ -19,7 +20,9 @@ export class KitchenComponent implements OnInit {
   foodStates = ['Ordered', 'Preparing', 'AwaitingDelivery', 'Completed'];
 
   orderSubscription: Subscription | undefined;
+  timersSubscription: Subscription | undefined;
   orders = signal<Order[]>([]);
+  currentTimers = signal<TimerUpdate[]>([]);
   constructor(private realtime: RealtimeClientService, private http: HttpClient) {
   }
 
@@ -30,6 +33,10 @@ export class KitchenComponent implements OnInit {
     this.orders.set([...existingOrders]);
     /// Subscribe to future order updates
     this.orderSubscription = this.realtime.ordersUpdated$.subscribe(orders => this.orders.set([...orders]));
+    this.timersSubscription = this.realtime.timerUpdate$.subscribe(timers => {
+      console.log(timers);
+      this.currentTimers.set([...timers]);
+    });
   }
 
   async updateState(id: number, $event: Event) {

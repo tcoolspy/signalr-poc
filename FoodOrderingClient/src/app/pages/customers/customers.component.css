@@ -1,0 +1,44 @@
+.foodMenu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  padding-bottom: 100px;
+}
+
+.menuPanel {
+  width: 30%;
+  margin: 0 5px;
+  padding: 10px;
+  text-align: center;
+  border: #cdcdcd 1px solid;
+  border-radius: 10px;
+}
+
+.foodImage {
+  width: 200px;
+  border-radius: 20px;
+  box-shadow: 2px 2px 2px #cdcdcd;
+}
+
+.foodDescriptionContainer {
+  display: flex; justify-content: center; align-items: center;
+}
+
+.foodDescription {
+  width: 80%;
+}
+
+.bannerPanel {
+  border: 1px solid #cdcdcd;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.activeOrdersPanel {
+  flex: 1;
+  border: 1px solid #cdcdcd;
+  padding: 10px;
+  border-radius: 10px;
+}
