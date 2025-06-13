@@ -19,7 +19,7 @@ ENV SSL_CERT_DIR=./SSLCerts
 
 COPY FoodOrdering/*.csproj ./FoodOrdering
 
-COPY "SignalRPOC Solution.sln" "SignalRPOC Solution.sln"
+COPY SignalRPOC%20Solution.sln SignalRPOC%20Solution.sln
 
 COPY ./nuget.config ./
 ENV DOTNET_RESTORE_CONFIGFILE=./nuget.config
